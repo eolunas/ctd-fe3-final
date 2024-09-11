@@ -1,10 +1,10 @@
 import React from "react";
-
+import { useCharStates } from "../Context";
 
 const Card = ({ name, username, id }) => {
-
+  const { setFavs } = useCharStates();
   const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
+    setFavs((favs) => [...favs, id] );
   }
 
   return (
