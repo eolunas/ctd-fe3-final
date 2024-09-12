@@ -14,6 +14,8 @@ export const Context = ({ children }) => {
 
   // Efecto para obtener datos de la API
   useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
     axios.get('https://jsonplaceholder.typicode.com/users')
       .then(res => {
         console.log(res.data)
@@ -29,8 +31,20 @@ export const Context = ({ children }) => {
     localStorage.setItem('favs', JSON.stringify(favs));
   }, [favs]);
 
+  // Aplicar la clase de tema al body del documento
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
+  // Función para alternar el tema y guardar la preferencia
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
   return (
-    <CharStates.Provider value={{ theme, setTheme, favs, setFavs, list }}>
+    <CharStates.Provider value={{ theme, toggleTheme, favs, setFavs, list }}>
       {children}
     </CharStates.Provider>
   );

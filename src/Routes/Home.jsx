@@ -1,4 +1,3 @@
-import React from 'react'
 import Card from '../Components/Card'
 import { useCharStates } from '../Context';
 
@@ -7,8 +6,7 @@ import { useCharStates } from '../Context';
 const Home = () => {
   const { list } = useCharStates();
   return (
-    <main className="" > 
-      <h1>Home</h1>
+    <main> 
       <div className='card-grid'>
         {list.map((item, index) => 
         <Card key={index} name={item.name} username={item.username} id={item.id}/>
