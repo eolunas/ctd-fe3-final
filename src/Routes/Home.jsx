@@ -4,12 +4,12 @@ import { useCharStates } from '../Context';
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
-  const { list } = useCharStates();
+  const { state } = useCharStates();
   return (
     <main> 
       <div className='card-grid'>
-        {list.map((item, index) => 
-        <Card key={index} name={item.name} username={item.username} id={item.id}/>
+        {state.list.map((item, index) => 
+          <Card key={index} name={item.name} username={item.username} id={item.id}/>
         )}
       </div>
     </main>

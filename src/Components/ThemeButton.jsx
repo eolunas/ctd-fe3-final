@@ -1,12 +1,16 @@
 import { useCharStates } from "../Context";
 
  const ThemeButton = () => {
-    const { theme, toggleTheme } = useCharStates();
+    const { state, dispatch } = useCharStates();
+    const toggleTheme = () => dispatch({
+      type: 'TOGGLE_THEME',
+      payload: !state.theme,
+    });
 
     return (
-      <button className={`btn-theme ${theme == 'light' ? "btn-light" : "btn-dark"}`} 
-                onClick={toggleTheme} >
-        {theme === 'light' ? '🌞' : '🌑'}
+      <button className={`btn-theme ${state.theme ? "btn-light" : "btn-dark"}`} 
+              onClick={toggleTheme} >
+        {state.theme ? '🌞' : '🌑'}
       </button>
     );
 }

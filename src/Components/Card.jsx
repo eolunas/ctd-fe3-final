@@ -1,25 +1,28 @@
+import { Link } from "react-router-dom";
 import { useCharStates } from "../Context";
 
 // eslint-disable-next-line react/prop-types
 const Card = ({ name, username, id }) => {
-  const { favs, setFavs, theme } = useCharStates();
-  const addFav = ()=>{
-    setFavs((favs) => [...favs, id] );
-  }
-  const stored = favs.includes(id);
+  const { state, dispatch } = useCharStates();
+  const stored = state.favs.find(item => item.id == id);
+  const addFav = () => dispatch({ 
+    type: stored ? 'REMOVE_FAVS' : 'ADD_FAVS', 
+    payload: { name, username, id } 
+  });
+  
   return (
-    <div className="card" >
-        {/* En cada card deberan mostrar en name - username y el id */}
-        <a href={`/Detail/${id}`}>
-          <img src="/images/doctor.jpg" alt="Foto doctor" />
-        </a>
-        <div className={`info-container ${theme == "dark" && "dark-info-container"}`}>
-            <span>{name}</span>
-            <span>{username}</span>
+    <div className="card">
+      <Link to={`/detail/${id}`}>
+        <img src="/images/doctor.jpg" alt="Foto doctor" />
+        <div className={`info-container ${!state.theme && "dark-info-container"}`}>
+            <span className="name-indicator">{name}</span>
+            <span className="username-indicator">{username}</span>
         </div>
-        <button onClick={addFav} className="favButton">
+      </Link>
+      <span className="id-indicator">{id}</span>
+      <button onClick={addFav} className="favButton">
         {stored ?"💚" : "🤍"}
-        </button>
+      </button>
     </div>
   );
 };

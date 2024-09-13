@@ -2,12 +2,10 @@ import { Link } from 'react-router-dom'
 import ThemeButton from './ThemeButton'
 import { useCharStates } from '../Context'
 
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
-
 const Navbar = () => {
-  const { theme } = useCharStates();
+  const { state } = useCharStates();
   return (
-    <nav className={theme == "dark" && "dark-nav"}>
+    <nav className={!state.theme && "dark-nav"}>
     <div className='logo-container'>
       <span><span className='contraste'>D</span>H Odonto</span>
     </div>
