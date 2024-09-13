@@ -13,7 +13,7 @@ const Card = ({ name, username, id }) => {
   return (
     <div className="card">
       <Link to={`/detail/${id}`}>
-        <img src="/images/doctor.jpg" alt="Foto doctor" />
+        <img src="images/doctor.jpg" alt="Foto doctor" />
         <div className={`info-container ${!state.theme && "dark-info-container"}`}>
             <span className="name-indicator">{name}</span>
             <span className="username-indicator">{username}</span>
